@@ -231,7 +231,9 @@ export default function FeedingRecordPage() {
               </Link>
             </div>
             <div className="flex items-center gap-4">
+              <label htmlFor="pet-select" className="sr-only">選擇寵物</label>
               <select
+                id="pet-select"
                 value={selectedPet}
                 onChange={(e) => setSelectedPet(e.target.value)}
                 className="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -264,8 +266,10 @@ export default function FeedingRecordPage() {
         <div className="bg-white rounded-lg shadow mb-8 p-4">
           <div className="flex items-center justify-between">
             <button 
+              type="button"
               onClick={goToPreviousDay}
               className="p-2 rounded-full hover:bg-gray-100"
+              aria-label="前往前一天"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -552,6 +556,7 @@ export default function FeedingRecordPage() {
               <button
                 onClick={() => setShowNutritionInfo(false)}
                 className="text-gray-400 hover:text-gray-600"
+                aria-label="關閉營養需求指南"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>

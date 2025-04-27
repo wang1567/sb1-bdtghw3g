@@ -10,13 +10,10 @@ export default function Dashboard() {
   const { signOut, user } = useAuthStore();
   const [reminders, setReminders] = useState<Reminder[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user) {
-      fetchReminders();
-    }
-  }, [user]);
+    fetchReminders();
+  }, []);
 
   const fetchReminders = async () => {
     try {
@@ -31,7 +28,6 @@ export default function Dashboard() {
       setReminders(data || []);
     } catch (error) {
       console.error('Error fetching reminders:', error);
-      setError(error instanceof Error ? error.message : 'Failed to fetch reminders');
     } finally {
       setLoading(false);
     }
@@ -142,10 +138,6 @@ export default function Dashboard() {
     }
   };
 
-  if (!user) {
-    return null;
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow">
@@ -155,7 +147,7 @@ export default function Dashboard() {
               <Logo size="md" />
             </div>
             <div className="flex items-center">
-              <span className="mr-4 text-gray-600">{user.email}</span>
+              <span className="mr-4 text-gray-600">{user?.email}</span>
               <button
                 onClick={signOut}
                 className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
@@ -168,14 +160,7 @@ export default function Dashboard() {
       </nav>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        {error && (
-          <div className="px-4 mb-8">
-            <div className="bg-red-50 text-red-700 p-4 rounded-lg">
-              {error}
-            </div>
-          </div>
-        )}
-
+        {/* 提醒區塊 */}
         {reminders.length > 0 && (
           <div className="px-4 mb-8">
             <div className="flex items-center justify-between mb-4">
@@ -222,6 +207,7 @@ export default function Dashboard() {
           </div>
         )}
 
+        {/* 功能選單 */}
         <div className="px-4 py-6 sm:px-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {menuItems.map((item) => (

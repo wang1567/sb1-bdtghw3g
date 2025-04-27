@@ -133,6 +133,7 @@ export default function Login() {
                 <button
                   onClick={() => setShowForgotPassword(false)}
                   className="text-gray-400 hover:text-gray-600"
+                  aria-label="關閉重設密碼窗口"
                 >
                   <X className="w-5 h-5" />
                 </button>

@@ -88,14 +88,7 @@ export default function DeviceManager() {
 
     } catch (err) {
       console.error('Bluetooth error:', err);
-      // 處理使用者取消選擇的情況
-      if (err instanceof Error && err.name === 'NotFoundError' && err.message.includes('cancelled')) {
-        // 使用者取消了選擇，不顯示錯誤訊息
-        console.log('User cancelled device selection');
-      } else {
-        // 其他錯誤
-        setError(err instanceof Error ? err.message : '藍芽連接失敗');
-      }
+      setError(err instanceof Error ? err.message : '藍芽連接失敗');
     } finally {
       setScanning(false);
     }
